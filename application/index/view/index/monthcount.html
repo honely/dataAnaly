@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>近12月销售汇总柱状图</title>
+    <script type="text/javascript" src="__PUBLIC__/admin/jquery-1.6.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/echarts/echarts.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/echarts/echarts-all.js"></script>
+</head>
+<body>
+<br/>
+<div id="main" style="width:100%; height: 600px;margin: 0 auto"></div>
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('main'));
+    option = {
+        title : {
+            text: '近12月销售汇总柱状图',
+            subtext: '{$ywy}'
+        },
+        tooltip : {
+            trigger: 'axis'
+        },
+        calculable : true,
+        xAxis : [
+            {
+                type : 'value',
+                boundaryGap : [0, 0.01]
+            }
+        ],
+        yAxis : [
+            {
+                type : 'category',
+                data:[{volist name="monthData" id="data"}"{$data['daylist']}",{/volist}]
+    }
+    ],
+    series : [
+        {
+            name:'销售金额',
+            type:'bar',
+            data:[{volist name="monthData" id="data"}"{$data['saledata']}",{/volist}]
+    }
+    ]
+    };
+    myChart.setOption(option);
+</script>
+</body>
+</html>

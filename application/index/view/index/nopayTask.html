@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>每日销售任务柱状图</title>
+    <script type="text/javascript" src="__PUBLIC__/admin/jquery-1.6.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/echarts/echarts.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/echarts/echarts-all.js"></script>
+</head>
+<body>
+<div>当月待回款汇总</div>
+<br/>
+<div id="main" style="width:375px; height: 600px;margin: 0 auto"></div>
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('main'));
+    option = {
+        title : {
+            text: '待回款汇总',
+            subtext: '{$ywy}'
+        },
+        tooltip : {
+            trigger: 'axis'
+        },
+        calculable : true,
+        xAxis : [
+            {
+                type : 'value',
+                boundaryGap : [0, 0.01]
+            }
+        ],
+        yAxis : [
+            {
+                type : 'category',
+                data:[{volist name="noPayData" id="data"}"{$data['daylist']}",{/volist}]
+    }
+    ],
+    series : [
+        {
+            name:'待回款金额',
+            type:'bar',
+            data:[{volist name="noPayData" id="data"}"{$data['nopay']}",{/volist}]
+    }
+    ]
+    };
+    myChart.setOption(option);
+</script>
+</body>
+</html>

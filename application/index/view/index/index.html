@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>销售任务柱状图</title>
+    <script type="text/javascript" src="__PUBLIC__/admin/jquery-1.6.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/echarts/echarts.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/echarts/echarts-all.js"></script>
+</head>
+<body>
+<div>销售任务和完成任务</div>
+<br/>
+<!-- 为ECharts准备一个具备大小（宽高）的DOM -->
+<div id="main" style="width:375px; height: 600px;margin: 0 auto"></div>
+<a href="<?=url('index/dayCount')?>">每日销售汇总</a>
+<script type="text/javascript">
+
+    /*基于准备好的dom，初始化echarts实例*/
+    var myChart = echarts.init(document.getElementById('main'));
+
+    option = {
+//        title : {
+//            text: '销售任务和完成任务',
+//            subtext: '{$ywy}'
+//        },
+        tooltip : {
+            trigger: 'axis'
+        },
+        legend: {
+            data:['目标金额','完成金额']
+        },
+        calculable : true,
+        xAxis : [
+            {
+                type : 'category',
+                data : ['孙钰婷']
+            }
+        ],
+        yAxis : [
+            {
+                type : 'value'
+            }
+        ],
+        series : [
+            {
+                name:'目标金额',
+                type:'bar',
+                data:[{$goalMoney}],
+                markPoint : {
+                    data : [
+                        {type : 'max', name: '最大值'},
+                        {type : 'min', name: '最小值'}
+                    ]
+                }
+            },
+            {
+                name:'完成金额',
+                type:'bar',
+                data:[{$finishMoney}],
+                markPoint : {
+                    data : [
+                        {type : 'max', name: '最大值'},
+                        {type : 'min', name: '最小值'}
+                    ]
+                }
+            }
+        ]
+    };
+    // 使用刚指定的配置项和数据显示图表
+    myChart.setOption(option);
+</script>
+<script>
+</script>
+</body>
+</html>

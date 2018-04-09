@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>新增用户</title>
+    <script type="text/javascript" src="__PUBLIC__/admin/jquery-1.6.min.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/echarts/echarts.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/echarts/echarts-all.js"></script>
+</head>
+<body>
+<div>新增用户</div>
+<br/>
+<div id="main" style="width:375px; height: 600px; margin: 0 auto"></div>
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('main'));
+    option = {
+        tooltip : {
+            trigger: 'axis'
+        },
+        calculable : true,
+        xAxis : [
+            {
+                type : 'category',
+                boundaryGap : false,
+                data : [{volist name="userData" id="user"}'{$user.monthlist}',{/volist}]
+    }
+    ],
+    yAxis : [
+        {
+            type : 'value'
+        }
+    ],
+        series : [
+        {
+            name:'新增用户',
+            type:'line',
+            stack: '新增个数',
+            data:[{volist name="userData" id="user"}'{$user.usernum}',{/volist}]
+    }
+    ]
+    };
+    myChart.setOption(option);
+</script>
+</body>
+</html>
